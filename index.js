@@ -39,7 +39,7 @@ async function run() {
     // find by category
     app.post('/category', async(req, res) => {
         const category = req.body.category;
-        console.log('from category',category);
+        // console.log('from category',category);
         const query = { sub_category: category};
         const result = await toysCollection.find(query).toArray();
         res.send(result)

@@ -31,7 +31,11 @@ async function run() {
     //db
     const toysCollection = client.db('toyCarsDB').collection('toys');
 
-    app.get('/getAllToys', async(req, res) => {
+    app.post('/getAllToys', async(req, res) => {
+        if(req.query.limit){
+            const result = await toysCollection.find().limit(20).toArray();
+            return res.send(result)
+        }
         const result = await toysCollection.find().toArray();
         res.send(result)
     })

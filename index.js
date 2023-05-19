@@ -31,12 +31,24 @@ async function run() {
     //db
     const toysCollection = client.db('toyCarsDB').collection('toys');
 
-    app.post('/getAllToys', async(req, res) => {
+    // show on all toys page 
+    app.get('/getAllToys', async(req, res) => {
+        // console.log(req.query);
         if(req.query.limit){
             const result = await toysCollection.find().limit(20).toArray();
             return res.send(result)
         }
         const result = await toysCollection.find().toArray();
+        res.send(result)
+    })
+
+
+    // search item
+    app.get('/search', async(req, res) => {
+        const search = req.query.search;
+        console.log(search);
+        const query = { name: { $regex: search, $options: 'i'}}
+        const result = await toysCollection.find(query).toArray();
         res.send(result)
     })
 

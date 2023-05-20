@@ -80,6 +80,15 @@ async function run() {
         res.send(result)
     })
 
+    // delete operation
+    app.delete('/toy/:id', async(req, res) => {
+        const id = req.params.id;
+        console.log(id);
+        const query = { _id: new ObjectId(id)}
+        const result = await toysCollection.deleteOne(query)
+        res.send(result)
+    })
+
 
     // find by category
     app.post('/category', async(req, res) => {

@@ -72,11 +72,13 @@ async function run() {
 
 
     // find by email 
-    app.get('/myToys/:email', async(req, res) => {
+    app.get('/myToys/:email/:ascending', async(req, res) => {
         const email = req.params.email;
-        console.log(email);
+        // console.log(email);
         const query = { seller_email : email};
-        const result = await toysCollection.find(query).toArray();
+        const ascending = req.params.ascending;
+        
+        const result = await toysCollection.find(query).sort({price: ascending}).toArray();
         res.send(result)
     })
 

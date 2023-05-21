@@ -64,7 +64,7 @@ async function run() {
     // find by id 
     app.get('/toy/:id', async(req, res) => {
         const id = req.params.id;
-        console.log(id);
+        // console.log(id);
         const query = { _id : new ObjectId(id)};
         const result = await toysCollection.findOne(query);
         res.send(result)
